@@ -1,0 +1,19 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+    <title>Game Board</title>
+    <link rel="stylesheet" href="{% static "game/style/style.css" %}">
+    <script src="{% static "game/script/game.js" %}"></script>
+</head>
+<body>
+<svg viewBox="0 0 100 100">
+    {% for token in token_list %}
+    <g id="token-id-{{ token.id }}" class="token" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
+        <circle class="token-icon" r="1" fill="black"/>
+        <text text-anchor="middle" y="-2">{{ token.name }}</text>
+    </g>
+    {% endfor %}
+</svg>
+</body>
+</html>
