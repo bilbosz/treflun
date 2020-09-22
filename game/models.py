@@ -22,6 +22,7 @@ class Token(models.Model):
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
     owner = models.ForeignKey(Player, models.deletion.DO_NOTHING)
+    image = models.ImageField(default="default.png", upload_to="tokens")
 
     def __str__(self):
         return str(self.name)

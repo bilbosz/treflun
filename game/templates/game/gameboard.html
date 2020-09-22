@@ -8,9 +8,12 @@
 </head>
 <body>
 <svg viewBox="0 0 100 100">
+    <mask id="round-mask">
+        <circle cy="4" r="5" fill="white" />
+    </mask>
     {% for token in token_list %}
     <g id="token-id-{{ token.id }}" class="token" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
-        <circle class="token-icon" r="1" fill="black"/>
+        <image class="token-icon" href="media/{{ token.image }}" x="-5" y="-1" width="10" height="10" preserveAspectRatio="none" mask="url(#round-mask)" />
         <text text-anchor="middle" y="-2">{{ token.name }}</text>
     </g>
     {% endfor %}

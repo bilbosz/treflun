@@ -1,13 +1,10 @@
 .token text {
-    fill: green;
     font-size: 4px;
     text-align: center;
     user-select: none;
     pointer-events: none;
-    z-index: -1;
 }
 
 .token-icon {
     fill: darkred;
-    z-index: 1;
 }
