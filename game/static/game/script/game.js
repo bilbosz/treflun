@@ -12,6 +12,17 @@ var utils = {
         point.x = x;
         point.y = y;
         return point.matrixTransform( svg.getCTM().inverse() );
+    },
+
+    findClassStartWith: function( classList, startsWith )
+    {
+        for( var i = 0; i < classList.length; ++i )
+        {
+            if( classList[i].startsWith( startsWith ) ) {
+                return classList[i];
+            }
+        }
+        return null;
     }
 }
 
@@ -20,6 +31,7 @@ function TokenDragHandler() {
 
     self.reset = function() {
         self.down = false;
+        self.tokens = null;
         self.token = null;
         self.offsetX = null;
         self.offsetY = null;
@@ -33,7 +45,9 @@ function TokenDragHandler() {
         if( icon.classList.contains( "token-icon" ) )
         {
             self.down = true;
-            self.token = icon.parentNode;
+            var tokenId = utils.findClassStartWith( icon.parentNode.classList, "token-id-" );
+            self.tokens = svg.getElementsByClassName( tokenId );
+            self.token = self.tokens[0];
 
             var tokenX = parseFloat( self.token.getAttribute( "data-x" ) );
             var tokenY = parseFloat( self.token.getAttribute( "data-y" ) );
@@ -50,9 +64,13 @@ function TokenDragHandler() {
             point.x = point.x + self.offsetX;
             point.y = point.y + self.offsetY;
 
-            self.token.setAttribute( "data-x", point.x );
-            self.token.setAttribute( "data-y", point.y );
-            self.token.setAttribute( "transform", "translate(" + point.x + ", " + point.y + ")" );
+            for( var i = 0; i < self.tokens.length; ++i )
+            {
+                var token = self.tokens[i];
+                token.setAttribute( "data-x", point.x );
+                token.setAttribute( "data-y", point.y );
+                token.setAttribute( "transform", "translate(" + point.x + ", " + point.y + ")" );
+            }
         }
     } );
     svg.addEventListener( "mouseup", function( e ) {
@@ -75,10 +93,14 @@ function ServerCommunication()
 
     self.connection.onmessage = function( e ) {
         const data = JSON.parse( e.data );
-        var token = document.getElementById( "token-id-" + parseInt( data.id ) );
-        token.setAttribute( "data-x", data.x );
-        token.setAttribute( "data-y", data.y );
-        token.setAttribute( "transform", "translate(" + data.x + ", " + data.y + ")" );
+        var tokens = document.getElementsByClassName( "token-id-" + parseInt( data.id ) );
+        for( var i = 0; i < tokens.length; ++i )
+        {
+            var token = tokens[i];
+            token.setAttribute( "data-x", data.x );
+            token.setAttribute( "data-y", data.y );
+            token.setAttribute( "transform", "translate(" + data.x + ", " + data.y + ")" );
+        }
     };
 
     self.connection.onclose = function( e ) {

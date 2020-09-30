@@ -12,8 +12,12 @@
         <circle cy="4" r="5" fill="white" />
     </mask>
     {% for token in token_list %}
-    <g id="token-id-{{ token.id }}" class="token" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
+    <g class="token token-id-{{ token.id }}" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
         <image class="token-icon" href="media/{{ token.image }}" x="-5" y="-1" width="10" height="10" preserveAspectRatio="none" mask="url(#round-mask)" />
+    </g>
+    {% endfor %}
+    {% for token in token_list %}
+    <g class="token token-id-{{ token.id }}" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
         <text text-anchor="middle" y="-2">{{ token.name }}</text>
     </g>
     {% endfor %}
