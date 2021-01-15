@@ -8,3 +8,17 @@
 .token-icon {
     fill: darkred;
 }
+
+table {
+    width: 100%;
+    height: 50%;
+    display: table;
+}
+
+#map {
+    width: 80%;
+}
+
+#chat {
+    width: 20%
+}
