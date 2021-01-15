@@ -11,7 +11,9 @@ class Player(models.Model):
 
 class Map(models.Model):
     name = models.CharField(default="", max_length=64)
-    image = models.CharField(default="", max_length=260)
+    image = models.ImageField(default="default_map.png", upload_to="maps")
+
+    maps = models.Manager()
 
     def __str__(self):
         return str(self.name)
