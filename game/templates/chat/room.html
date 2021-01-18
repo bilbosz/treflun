@@ -4,4 +4,5 @@
     <input id="chat-message-input" type="text" size="30">
     <input id="chat-message-submit" type="button" value="Send">
 </div>
-<script src="static/game.room.js"></script>
+{% load static %}
+<script src="{% static 'game/script/room.js' %}"></script>
