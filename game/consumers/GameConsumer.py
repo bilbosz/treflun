@@ -42,6 +42,7 @@ class GameConsumer(AsyncWebsocketConsumer):
             token.x = x
             token.y = y
             token.save()
+            # TODO remove later
             print("%s updated position of %s" % (updater, token.name))
             self.channel_layer.group_send(
                 self.session_id,
