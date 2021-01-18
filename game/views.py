@@ -1,8 +1,9 @@
 from django.shortcuts import render
 
-from .models import Token, Map
+from game.models.Map import Map
+from game.models.Token import Token
 
 
 def index(request):
     return render(request, 'index.html',
-                  {'token_list': Token.objects.all(), 'map': Map.maps.get(id=1), 'user': request.user})
+                  {'token_list': Token.objects.all(), 'map': Map.objects.get(id=1), 'user': request.user})
