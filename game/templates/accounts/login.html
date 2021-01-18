@@ -1,0 +1,26 @@
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'do_auth' %}">
+    {% csrf_token %}
+    <input name="username" type="username" id="username" class="form-control" placeholder="Username" required autofocus>
+    </br>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    </br>
+    <button type="submit">Login</button>
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+{% endblock %}
