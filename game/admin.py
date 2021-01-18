@@ -1,6 +1,9 @@
 from django.contrib import admin
-from . import models
 
-admin.site.register(models.Map)
-admin.site.register(models.Player)
-admin.site.register(models.Token)
+from game.models.Map import Map
+from game.models.Player import Player
+from game.models.Token import Token
+
+admin.site.register(Map)
+admin.site.register(Player)
+admin.site.register(Token)

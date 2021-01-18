@@ -1,0 +1,17 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+    <title>Game Board</title>
+    <link rel="stylesheet" href="{% static 'game/style/style.css' %}">
+    <script src="{% static 'game/script/game.js' %}"></script>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <td id="map">{% include "game/gameboard.html" %}</td>
+        <td id="chat">{% include "chat/room.html" %}</td>
+    </tr>
+</table>
+</body>
+</html>
