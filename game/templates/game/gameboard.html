@@ -1,10 +1,10 @@
-<svg viewBox="0 0 500 500" style="background-image: url(media/{{ map.image }}); background-repeat: no-repeat;">
+<svg viewBox="0 0 500 500" style="background-image: url(../media/{{ map.image }}); background-repeat: no-repeat;">
     <mask id="round-mask">
         <circle cy="4" r="5" fill="white"/>
     </mask>
     {% for token in token_list %}
     <g class="token token-id-{{ token.id }}" data-token-id="{{ token.id }}" data-x="{{ token.x }}" data-y="{{ token.y }}" transform="translate({{ token.x }}, {{ token.y }})">
-        <image class="token-icon" href="media/{{ token.image }}" x="-5" y="-1" width="10" height="10" preserveAspectRatio="none" mask="url(#round-mask)"/>
+        <image class="token-icon" href="../media/{{ token.image }}" x="-5" y="-1" width="10" height="10" preserveAspectRatio="none" mask="url(#round-mask)"/>
     </g>
     {% endfor %}
     {% for token in token_list %}
